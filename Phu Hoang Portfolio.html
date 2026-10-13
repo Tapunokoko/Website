@@ -1,0 +1,287 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Phu Hoang Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: engineering notebook on graph paper; one column, a scope trace hero, measured numbers set as instrument readouts */
+:root{
+  --paper:#f3f5f7;
+  --grid:#dde3ea;
+  --ink:#16222f;
+  --muted:#556271;
+  --line:#c7d0da;
+  --copper:#b5562a;
+  --signal:#1f5fa8;
+  --panel:#ffffff;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10171f;--grid:#1a2430;--ink:#e6ebf0;--muted:#97a4b2;--line:#2a3644;
+    --copper:#e08a5a;--signal:#6fa8e8;--panel:#151e28;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10171f;--grid:#1a2430;--ink:#e6ebf0;--muted:#97a4b2;--line:#2a3644;
+  --copper:#e08a5a;--signal:#6fa8e8;--panel:#151e28;color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;
+  color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;
+}
+.wrap{max-width:960px;margin:0 auto;padding-inline:20px;padding-block:40px 64px;display:grid;gap:56px}
+a{color:var(--signal)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--copper);outline-offset:3px}
+h1,h2,h3{text-wrap:balance;margin:0}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* hero */
+.hero{display:grid;gap:18px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(48px,11vw,104px);line-height:.92;letter-spacing:.01em;text-transform:uppercase}
+.hero h1 span{color:var(--copper)}
+.tag{font-size:clamp(17px,2.4vw,20px);max-width:62ch;color:var(--ink)}
+.trace{width:100%;height:96px;display:block;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+.trace path{fill:none;stroke-width:2.2}
+.trace .sq{stroke:var(--copper)}
+.trace .sn{stroke:var(--signal);opacity:.7}
+.trace text{fill:var(--muted);font-family:var(--mono);font-size:11px}
+.contact{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;font-family:var(--mono);font-size:14px}
+.contact .email{display:inline-flex;gap:8px;align-items:center}
+button.copy{font:inherit;font-size:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:3px 9px;border-radius:3px;cursor:pointer}
+button.copy:hover{border-color:var(--copper)}
+.avail{display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;border:1px solid var(--copper);color:var(--copper);padding:6px 12px;border-radius:3px;width:fit-content;background:var(--panel)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--copper)}
+
+/* readouts */
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.ro{background:var(--panel);padding:18px 18px 16px;display:grid;gap:4px;min-width:0}
+.ro b{font-family:var(--display);font-weight:600;font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+.ro b small{font-size:18px;color:var(--muted);margin-left:4px}
+.ro p{margin:0;font-size:14px;color:var(--muted)}
+
+section{display:grid;gap:22px}
+.sh{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.sh h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,40px);text-transform:uppercase;letter-spacing:.02em}
+
+/* bridge */
+.bridge{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;background:var(--panel);border:1px solid var(--line);padding:24px}
+.bridge > div{min-width:0}
+.bridge h3{font-size:22px;font-weight:600}
+.bridge p{margin:8px 0 0;max-width:60ch}
+.bars{display:grid;gap:14px;align-content:center}
+.bar{display:grid;gap:6px}
+.bar .row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+.bar .track{height:22px;background:var(--grid);position:relative}
+.bar .fill{height:100%}
+.f-pred{width:calc(600/700*100%);background:var(--signal)}
+.f-meas{width:calc(622.8/700*100%);background:var(--copper)}
+.axis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.err{font-family:var(--mono);font-size:13px;color:var(--ink)}
+
+/* project cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);padding:20px;display:grid;gap:10px;align-content:start;min-width:0}
+.card h3{font-size:19px;font-weight:600;line-height:1.3}
+.card p{margin:0;font-size:15px}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);padding:2px 8px;border-radius:2px;color:var(--muted)}
+.chip.live{border-color:var(--copper);color:var(--copper)}
+
+/* experience */
+.job{display:grid;grid-template-columns:200px 1fr;gap:24px;padding-block:20px;border-bottom:1px solid var(--line)}
+.job:last-child{border-bottom:0}
+.job > div{min-width:0}
+.job h3{font-size:19px;font-weight:600}
+.when{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.job ul{margin:8px 0 0;padding-left:18px;display:grid;gap:6px}
+
+/* education + skills */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.edu h3{font-size:18px;font-weight:600}
+.edu p{margin:4px 0 0;font-size:15px;color:var(--muted)}
+.gpa{font-family:var(--mono);color:var(--copper)}
+.skills{display:grid;gap:14px}
+.skills div{display:grid;grid-template-columns:170px 1fr;gap:14px;font-size:15px}
+.skills dt{font-weight:600}
+.skills dd{margin:0;color:var(--muted)}
+
+.how{background:var(--ink);color:var(--paper);padding:28px;display:grid;gap:10px}
+.how .label{color:var(--copper)}
+.how p{margin:0;font-size:clamp(18px,2.6vw,22px);max-width:56ch;line-height:1.5}
+footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+
+@media (max-width:720px){
+  .bridge,.two{grid-template-columns:1fr}
+  .job{grid-template-columns:1fr;gap:6px}
+  .skills div{grid-template-columns:1fr;gap:2px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .trace .sq{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.2s ease-out .2s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+}
+</style>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="label">Electrical engineering student · Iron Range Engineering</div>
+    <h1>Tran Thanh<br><span>Phu Hoang</span></h1>
+    <p class="tag">I like to run the numbers, build the thing, and test it to see if it matches. When it does not match, I find out why.</p>
+    <svg class="trace" viewBox="0 0 960 96" preserveAspectRatio="none" aria-label="Step pulses and a sine wave, like a stepper motor making a musical note">
+      <path class="sn" d="M0 48 Q30 14 60 48 T120 48 T180 48 T240 48 T300 48 T360 48 T420 48 T480 48 T540 48 T600 48 T660 48 T720 48 T780 48 T840 48 T900 48 T960 48"/>
+      <path class="sq" d="M0 70 H40 V26 H80 V70 H120 V26 H160 V70 H200 V26 H240 V70 H280 V26 H320 V70 H360 V26 H400 V70 H440 V26 H480 V70 H520 V26 H560 V70 H600 V26 H640 V70 H680 V26 H720 V70 H760 V26 H800 V70 H840 V26 H880 V70 H920 V26 H960"/>
+      <text x="8" y="90">CH1 step pulses</text>
+      <text x="840" y="14">CH2 pitch</text>
+    </svg>
+    <div class="contact">
+      <span class="email"><span id="em">phu.hoang@ire.minnstate.edu</span><button class="copy" id="copyBtn" type="button">Copy</button></span>
+      <span>(360) 684-4278</span>
+      <a href="https://linkedin.com/in/phu-hoang-engineer" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/Tapunokoko" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="avail"><span class="dot"></span>Open for full time co op from Dec 17, 2026 · up to 2 years · will relocate anywhere in the U.S.</div>
+  </header>
+
+  <div class="readouts" aria-label="Key numbers">
+    <div class="ro"><span class="label">Bridge prediction error</span><b>4<small>%</small></b><p>600 lb calculated, 622.8 lb tested</p></div>
+    <div class="ro"><span class="label">Strength to weight</span><b>809</b><p>for a 0.77 lb truss bridge</p></div>
+    <div class="ro"><span class="label">Pallets inspected</span><b>30<small>+ / shift</small></b><p>in SAP with RF scanners at TTI</p></div>
+    <div class="ro"><span class="label">Transfer GPA</span><b>3.57</b><p>B.S. Engineering, expected Dec 2028</p></div>
+  </div>
+
+  <section id="bridge">
+    <div class="sh"><span class="label">Featured</span><h2>Predicted vs measured</h2></div>
+    <div class="bridge">
+      <div>
+        <h3>Truss Bridge Design &amp; Load Testing</h3>
+        <p>In Engineering Statics, I led a team of 3 through method of sections force calculations in Excel and an Onshape CAD model. We predicted the failure load by hand, built the bridge, and loaded it until it broke.</p>
+        <p class="err">Error between hand calculation and test: (622.8 − 600) / 600 ≈ 3.8%</p>
+      </div>
+      <div class="bars">
+        <div class="bar"><div class="row"><span>Predicted</span><span>600 lb</span></div><div class="track"><div class="fill f-pred"></div></div></div>
+        <div class="bar"><div class="row"><span>Measured at failure</span><span>622.8 lb</span></div><div class="track"><div class="fill f-meas"></div></div></div>
+        <div class="axis"><span>0</span><span>350</span><span>700 lb</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sh"><span class="label">Work</span><h2>Projects</h2></div>
+    <div class="grid">
+      <article class="card">
+        <div class="meta"><span class="chip live">In progress</span><span class="chip">Engr 346 · IRE</span></div>
+        <h3>Singing Stepper Motor</h3>
+        <p>Programming an Arduino Uno to drive a 28BYJ-48 stepper motor through a ULN2003 driver so it plays a full song. I measure each note with a phone tuner and a Python FFT, then compare full step and half step modes against the commanded pitch.</p>
+        <div class="meta"><span class="chip">Arduino C/C++</span><span class="chip">Python FFT</span><span class="chip">Faraday's law</span></div>
+      </article>
+      <article class="card">
+        <div class="meta"><span class="chip live">In progress</span><span class="chip">Client · Lamppa Manufacturing</span></div>
+        <h3>Sauna Stove Redesign</h3>
+        <p>Leading the heat transfer and air ventilation design with a student team. I model the stove in SolidWorks, test airflow with a smoke pen and anemometer, and am building a thermocouple circuit in Arduino to measure temperature.</p>
+        <div class="meta"><span class="chip">SolidWorks</span><span class="chip">Thermocouple</span><span class="chip">Python</span></div>
+      </article>
+      <article class="card">
+        <div class="meta"><span class="chip">Class project · Green Tech Renewables</span></div>
+        <h3>Value Stream Mapping</h3>
+        <p>Mapped a company's full process flow in Visio, measured cycle and wait times, found where work waited or repeated, and presented Lean improvement ideas to the company.</p>
+        <div class="meta"><span class="chip">Visio</span><span class="chip">Lean</span></div>
+      </article>
+      <article class="card">
+        <div class="meta"><span class="chip">Open source</span></div>
+        <h3>Personal Finance Dashboard</h3>
+        <p>Built and published a dashboard on GitHub that sorts CSV records into 14 categories and charts spending, budget, and trends. Packaged as a Claude Cowork plugin.</p>
+        <div class="meta"><span class="chip">CSV</span><span class="chip">GitHub</span></div>
+      </article>
+      <article class="card">
+        <div class="meta"><span class="chip">Hands on</span></div>
+        <h3>Arduino Sensor &amp; Control Circuits</h3>
+        <p>Built breadboard circuits with servos, phototransistors, piezo buzzers, and LED displays, and wrote the Arduino code to run them.</p>
+        <div class="meta"><span class="chip">Breadboard</span><span class="chip">Arduino C/C++</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sh"><span class="label">Jobs</span><h2>Experience</h2></div>
+    <div>
+      <div class="job">
+        <div><div class="when">Sept 2025 to June 2026</div><div class="label">Bellingham, WA</div></div>
+        <div>
+          <h3>Vice President for Operations · Associated Students of Whatcom Community College</h3>
+          <ul>
+            <li>Chaired a committee of 6 and planned each step backward from the deadline, so the new Constitution and Bylaws passed with only minor wording changes.</li>
+            <li>Helped allocate a $1M annual budget to 23 student organizations, tracked spending in Excel, and reported to the Executive Board and the Board of Trustees.</li>
+            <li>Delivered approved minutes for 3 governing bodies on time every session.</li>
+            <li>Checked more than 100 ASWCC items against records in the annual property audit.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job">
+        <div><div class="when">Dec 2020 to Sept 2021</div><div class="label">Anderson, SC</div></div>
+        <div>
+          <h3>Quality Auditor · Techtronic Industries (TTI)</h3>
+          <ul>
+            <li>Function checked up to 25 assembled drills and power tools per shift for damage, missing parts, wrong labels, and packaging problems.</li>
+            <li>Inspected more than 30 incoming pallets per shift against part number and quantity specs, logging results in SAP with RF scanners.</li>
+            <li>Ran cell audits against the team's QA checklists, flagged the defect patterns that kept recurring, and proposed checklist revisions to the supervisor.</li>
+            <li>Organized 2 to 5 staff in a multi team effort that checked and fixed about 800 snow blowers in one peak week.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="how">
+    <span class="label">How I solve problems</span>
+    <p>When something breaks, I compare it to the last state that worked and find what changed. When I am stuck, I ask, research, then decide.</p>
+  </div>
+
+  <section id="background">
+    <div class="sh"><span class="label">Background</span><h2>Education &amp; skills</h2></div>
+    <div class="two">
+      <div class="card edu">
+        <span class="label">Now</span>
+        <h3>Minnesota State University, Mankato · Iron Range Engineering</h3>
+        <p>B.S. Engineering, expected Dec 2028 · <span class="gpa">Transfer GPA 3.57</span></p>
+        <p>Co op based, ABET accredited. Fall 2026: Motors, Generators &amp; Transformers, Instrumentation, Thermodynamics, Fluid Mechanics, Material Science, Dynamics, Project Management.</p>
+      </div>
+      <div class="card edu">
+        <span class="label">Earlier</span>
+        <h3>Western Washington University</h3>
+        <p>B.A. International Business &amp; Operations Management, June 2024</p>
+        <p>Operations Management, Lean Systems Application, Statistics, SAP Entry Skills, Project Management.</p>
+      </div>
+    </div>
+    <dl class="skills card">
+      <div><dt>Motors &amp; Controls</dt><dd>Stepper motor control (ULN2003), full and half step modes, servo control, induction motors and VFDs (coursework)</dd></div>
+      <div><dt>Circuits</dt><dd>Circuit analysis, LTspice schematics, breadboard circuits, thermocouple sensing</dd></div>
+      <div><dt>CAD &amp; Testing</dt><dd>SolidWorks, Onshape, load testing to failure, airflow testing, FFT frequency analysis</dd></div>
+      <div><dt>Quality &amp; Lean</dt><dd>Quality auditing, incoming inspection, 5S, Value Stream Mapping, SAP, RF scanners</dd></div>
+      <div><dt>Software</dt><dd>Python, Arduino C/C++, Excel, Power BI, PowerPoint, Word</dd></div>
+    </dl>
+  </section>
+
+  <footer>
+    <span>Tran Thanh Phu Hoang · Open to relocation, U.S.</span>
+    <span>Long term goal: a career making and manufacturing motors</span>
+  </footer>
+</main>
+
+<script>
+document.getElementById('copyBtn').addEventListener('click', function(){
+  var btn = this, txt = document.getElementById('em').textContent;
+  function sel(){ var r=document.createRange(); r.selectNodeContents(document.getElementById('em')); var s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='Selected'; }
+  try{
+    navigator.clipboard.writeText(txt).then(function(){ btn.textContent='Copied'; setTimeout(function(){btn.textContent='Copy'},1600); }, sel);
+  }catch(e){ sel(); }
+});
+</script>
+
+</body></html>
