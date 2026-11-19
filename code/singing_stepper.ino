@@ -2,7 +2,7 @@
   Singing Stepper - Engr 346 DLA
 
     Type a command and press Enter:
-    440     play 440 steps/s (= 440 Hz) until you type anything else
+    440     play 440 steps/s (= 440 Hz) until the next command
     w f h   wave / full / half step mode
     r       ramp on/off (start at 100 steps/s and speed up)
     t       test: play 10 notes, 3 s each, 1 s quiet between
@@ -56,7 +56,7 @@ const float ALPHABET[][2] = {
 
 const int GAP_MS = 30;  // short silence after each note
 
-byte row = 1;        // which row of the coil table we're on
+byte row = 1;        // current row of the coil table
 byte stepSize = 2;   // 2 for wave or full (skip every other row), 1 for half
 char mode = 'f';
 bool rampOn = false;
@@ -86,7 +86,7 @@ void setMode(char m) {
   Serial.println(m);
 }
 
-// Print what we're about to play
+// Print the tone info before playing
 void printInfo(float hz) {
   unsigned long period = 1000000.0 / hz;          // microseconds between steps
   float stepsPerRev = (stepSize == 1) ? 4096 : 2048;
@@ -98,8 +98,8 @@ void printInfo(float hz) {
 }
 
 // Step at 'hz' steps per second for 'ms' milliseconds.
-// ms = 0 means keep going until you type something.
-// Returns false if you typed something to stop it.
+// ms = 0: keep going until new input arrives.
+// Returns false if stopped by new input.
 bool playTone(float hz, unsigned long ms) {
   float rate = hz;
   if (rampOn && hz > 100) rate = 100;           // ramp: start slow
@@ -109,7 +109,7 @@ bool playTone(float hz, unsigned long ms) {
   setCoils(row);
 
   while (ms == 0 || millis() - start < ms) {
-    if (Serial.available()) {                   // you typed something: stop
+    if (Serial.available()) {                   // new input: stop
       allOff();
       return false;
     }
@@ -153,7 +153,7 @@ void playSong(const float song[][2], int count, int bpm) {
     unsigned long noteMs = song[i][1] * sixteenthMs - GAP_MS;    // column 1 = the length
     Serial.println(hz);
     Serial.flush();
-    if (!playTone(hz, noteMs)) return;         // play the note (stop if you typed something)
+    if (!playTone(hz, noteMs)) return;         // play the note (stop on new input)
     delay(GAP_MS);
   }
   Serial.println("Song done");
@@ -169,7 +169,7 @@ void setup() {
 void loop() {
   if (!Serial.available()) return;             // nothing typed yet
 
-  String cmd = Serial.readStringUntil('\n');   // read what you typed
+  String cmd = Serial.readStringUntil('\n');   // read the typed command
   cmd.trim();                                  // remove spaces and the Enter key
   if (cmd.length() == 0) return;
   char c = cmd[0];
@@ -188,7 +188,7 @@ void loop() {
     float hz = cmd.toFloat();                  // turn text like "440" into a number
     if (hz >= 1 && hz <= 3000) {
       printInfo(hz);
-      playTone(hz, 0);                         // play until you type something
+      playTone(hz, 0);                         // play until the next input
     } else {
       Serial.println("Unknown command");
     }
