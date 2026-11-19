@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Phu Hoang</title>
+<script>
+  /* Any unknown path like /Stepper, /singing-stepper or /contact goes to the matching part of the home page */
+  (function(){
+    var p = location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase().split('/')[0];
+    var map = {
+      'singing-stepper':'stepper', singingstepper:'stepper', stepper:'stepper', 'stepper-motor':'stepper',
+      'truss-bridge':'bridge', truss:'bridge', bridge:'bridge',
+      lamppa:'sauna', sauna:'sauna',
+      arduino:'arduino', circuits:'arduino',
+      vsm:'vsm', 'value-stream-map':'vsm', 'value-stream':'vsm',
+      dashboard:'dash', dash:'dash', finance:'dash', 'finance-dashboard':'dash',
+      home:'home', about:'about', projects:'projects', portfolio:'projects', defines:'defines',
+      experience:'experience', leadership:'leadership', contact:'contact', resume:'resume'
+    };
+    location.replace('/' + (map[p] ? '#' + map[p] : ''));
+  })();
+</script>
+</head>
+<body><p>Page not found. <a href="/">Go to the home page</a>.</p></body>
+</html>

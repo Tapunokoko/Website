@@ -187,8 +187,30 @@
   /* dialogs */
   function openM(key){ var m=document.getElementById('m-'+key); if(!m) return; lastFocus=document.activeElement; m.hidden=false; document.body.classList.add('noscroll'); openModal=m; m.querySelector('.modal-box').scrollTop=0; m.querySelectorAll('video[autoplay]').forEach(function(v){ v.muted=true; var p=v.play(); if(p&&p.catch) p.catch(function(){}); }); var ft=m.querySelector('.mtab'); if(ft) ft.click(); setTimeout(function(){ m.querySelector('.modal-close').focus(); },30); }
   function closeM(){ if(!openModal) return; var v=openModal.querySelector('video'); if(v){ try{v.pause()}catch(e){} } openModal.hidden=true; document.body.classList.remove('noscroll'); openModal=null; if(lastFocus) try{lastFocus.focus()}catch(e){} }
-  document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener('click',function(){ openM(b.dataset.open); }); });
-  document.querySelectorAll('.modal').forEach(function(m){ m.addEventListener('click',function(e){ if(e.target===m||e.target.hasAttribute('data-close')) closeM(); }); });
+  document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener('click',function(){ openM(b.dataset.open); setHash(b.dataset.open); }); });
+  document.querySelectorAll('.modal').forEach(function(m){ m.addEventListener('click',function(e){ if(e.target===m||e.target.hasAttribute('data-close')){ closeM(); setHash('projects'); } }); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&location.hash&&PROJECT_LINKS[location.hash.slice(1).toLowerCase()]&&!openModal) setHash('projects'); });
+
+  /* ===== direct links to a project: tranthanhphuhoang.us.com/#stepper (or /stepper) opens that project ===== */
+  var PROJECT_LINKS={
+    stepper:'stepper', 'singing-stepper':'stepper', singingstepper:'stepper',
+    bridge:'bridge', 'truss-bridge':'bridge', truss:'bridge',
+    sauna:'sauna', lamppa:'sauna',
+    arduino:'arduino', circuits:'arduino',
+    vsm:'vsm', 'value-stream-map':'vsm', 'value-stream':'vsm',
+    dash:'dash', dashboard:'dash', finance:'dash', 'finance-dashboard':'dash'
+  };
+  function setHash(h){ try{ history.replaceState(null,'','#'+h); }catch(_){} }
+  function openFromHash(){
+    var key=PROJECT_LINKS[(location.hash||'').slice(1).toLowerCase()]; if(!key) return false;
+    var p=pages.findIndex(function(pg){return pg.id==='projects'});
+    if(p>=0){ var pg=pages[p]; window.scrollTo(0,pg.getBoundingClientRect().top+window.scrollY-70); setCur(p); }
+    if(openModal&&openModal.id!=='m-'+key) closeM();
+    if(!openModal) openM(key);
+    return true;
+  }
+  openFromHash();
+  window.addEventListener('hashchange',openFromHash);
 
   /* arduino video: plays only when asked, once, with sound */
   (function(){ var v=document.getElementById('ardVid'), b=document.getElementById('ardPlay'); if(!v||!b) return;

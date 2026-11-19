@@ -20,6 +20,7 @@ The site is plain HTML, CSS, and JavaScript with no framework or build step, hos
 - **Project pop-ups** written from scratch as accessible dialogs (`role="dialog"`, focus handling, Escape to close) with tabs inside
 - **Responsive design** from phone to desktop using CSS grid, `clamp()` type sizes, and media queries
 - **Light and fast:** the page itself is about 60 KB; photos and videos load lazily from `assets/`
+- **Direct project links:** `tranthanhphuhoang.us.com/stepper` (also `/bridge`, `/sauna`, `/arduino`, `/vsm`, `/dashboard`) opens that project's pop-up right away, and each link shows its own preview card when shared
 - **Code highlighting** with [Prism.js](https://prismjs.com/)
 - **Link previews** with Open Graph tags, so shared links show a card with my photo
 
