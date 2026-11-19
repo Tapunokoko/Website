@@ -39,6 +39,9 @@ The site is plain HTML, CSS, and JavaScript with no framework or build step, hos
 │   └── docs/             Resume PDF
 ├── code/
 │   └── singing_stepper.ino   Arduino code for the Singing Stepper Motor
+├── stepper/, bridge/, sauna/, arduino/, vsm/, dashboard/
+│                         Short links to each project, each with its own link preview
+├── 404.html              Sends mistyped links to the right part of the page
 └── CNAME                 Custom domain for GitHub Pages
 ```
 

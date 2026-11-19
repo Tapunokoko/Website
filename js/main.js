@@ -50,30 +50,6 @@
   hzR.addEventListener('input',function(){ hz.value=hzR.value; calc(); });
   setMode('f');
 
-  /* induction motor canvas */
-  (function(){
-    var cv=document.getElementById('motor'); if(!cv||!cv.getContext) return;
-    var ctx=cv.getContext('2d'),btn=document.getElementById('motorBtn'),running=!reduce,field=.4,rotor=0,last=0,raf=null,TAU=Math.PI*2;
-    function size(){ var d=window.devicePixelRatio||1,w=cv.clientWidth||280; cv.width=Math.round(w*d); cv.height=Math.round(w*d); }
-    function draw(){
-      var W=cv.width,c=W/2,R=W*.48,r1=R*.6,r2=r1-R*.035; ctx.clearRect(0,0,W,W);
-      ctx.beginPath(); ctx.arc(c,c,R,0,TAU); ctx.moveTo(c+r1,c); ctx.arc(c,c,r1,TAU,0,true); ctx.closePath(); ctx.fillStyle='#1e2a23'; ctx.fill('evenodd');
-      var N=24,sw=R*.11,sl=R*.22;
-      for(var i=0;i<N;i++){ var th=i/N*TAU,k=Math.cos(2*(th-field)); ctx.save(); ctx.translate(c+Math.cos(th)*(r1+sl/2+R*.01),c+Math.sin(th)*(r1+sl/2+R*.01)); ctx.rotate(th);
-        ctx.fillStyle='#b8692e'; ctx.beginPath(); ctx.roundRect?ctx.roundRect(-sl/2,-sw/2,sl,sw,sw*.35):ctx.rect(-sl/2,-sw/2,sl,sw); ctx.fill();
-        ctx.globalAlpha=Math.min(1,Math.abs(k)*.95); ctx.fillStyle=k>0?'#22c55e':'#f59e0b'; ctx.fill(); ctx.globalAlpha=1; ctx.restore(); }
-      ctx.save(); ctx.translate(c,c); ctx.rotate(rotor); ctx.beginPath(); ctx.arc(0,0,r2,0,TAU); ctx.fillStyle='#2c3a32'; ctx.fill();
-      for(var j=0;j<18;j++){ ctx.save(); ctx.rotate(j/18*TAU); ctx.fillStyle='#8fa99a'; ctx.beginPath(); ctx.ellipse(r2*.8,0,r2*.11,r2*.05,0,0,TAU); ctx.fill(); ctx.restore(); }
-      ctx.beginPath(); ctx.arc(0,0,r2*.28,0,TAU); ctx.fillStyle='#e8f3ec'; ctx.fill(); ctx.fillStyle='#0b0f0d'; ctx.fillRect(r2*.16,-r2*.05,r2*.12,r2*.1); ctx.restore();
-    }
-    function tick(t){ if(!last) last=t; var dt=Math.min(.05,(t-last)/1000); last=t; field+=dt*.9; rotor+=dt*.9*.94; draw(); if(running) raf=requestAnimationFrame(tick); }
-    function start(){ running=true; last=0; btn.textContent='Pause motor'; raf=requestAnimationFrame(tick); }
-    function stop(){ running=false; cancelAnimationFrame(raf); btn.textContent='Run motor'; }
-    var userPaused=false; btn.addEventListener('click',function(){ if(running){userPaused=true;stop();} else {userPaused=false;start();} });
-    size(); draw(); window.addEventListener('resize',function(){size();draw();});
-    window.__motor={start:function(){ if(!reduce&&!userPaused) start(); }, stop:function(){ if(running) stop(); }}; running=false; btn.textContent='Run motor';
-  })();
-
   /* ===== pages, dial, dialogs, video ===== */
   var pages=[].slice.call(document.querySelectorAll('.page'));
   var navA=[].slice.call(document.querySelectorAll('.nav a'));
@@ -104,7 +80,6 @@
     pages.forEach(function(p,j){ if(p.getBoundingClientRect().top<=line) k=j; });
     if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4) k=N-1;
     setCur(k);
-    if(window.__motor){ var r=document.getElementById('motor').getBoundingClientRect(); (r.bottom>0&&r.top<window.innerHeight)?window.__motor.start():window.__motor.stop(); }
   }
   window.addEventListener('scroll',onScroll,{passive:true});
   document.querySelectorAll('[data-go]').forEach(function(a){ a.addEventListener('click',function(e){ e.preventDefault(); show(+a.dataset.go); closeOrb(); }); });
